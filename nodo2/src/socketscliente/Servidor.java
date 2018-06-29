@@ -8,15 +8,19 @@ package socketscliente;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author leona
  */
-public class Servidor extends Thread {
+public class Servidor implements Runnable {
     
     Socket _socket;
     
@@ -25,26 +29,41 @@ public class Servidor extends Thread {
     }
     
     @Override
-    public void start (){
+    public void run (){
         
         try {
-            
+            ObjectOutputStream _out = new ObjectOutputStream(_socket.getOutputStream());
+            ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
             while(true){
-                ServerSocket _serverSocket = new ServerSocket(1237);
+                ServerSocket _serverSocket = new ServerSocket(Variables.puerto);
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
                 System.out.println("Cliente aceptado: "+_socket.getInetAddress());
                 
-                DataOutputStream _dataOutputStream;
+                DataOutputStream _dataOutputStream = null;
                 try (DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream())) {
                     
                     _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
                     String _peticion = _dataInputStream.readUTF();
                     System.out.println(_peticion + "Cliente: "+_socket.getInetAddress());
-                    _dataOutputStream.writeUTF("Chao");
+                    
+                    if(_peticion.equals("sync")){
+                        _dataOutputStream.writeUTF("ack");
+                        _out = new ObjectOutputStream(_socket.getOutputStream());
+                        _in = new ObjectInputStream(_socket.getInputStream());
+                        
+                        Transporte _transporte = (Transporte) _in.readObject();
+                        System.out.println("Transporte con "+_transporte.getPaquete()+ " paquetes");
+                        
+                    }
+                   
+                    
+                    
                     
                       
-                } 
+                } catch (ClassNotFoundException ex) { 
+                    Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                }
         _dataOutputStream.close();
         _socket.close();
         

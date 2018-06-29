@@ -15,14 +15,14 @@ import java.util.TimerTask;
  *
  * @author leona
  */
-public class Cliente extends Thread {
+public class Cliente implements Runnable {
     
     @Override
-    public void start(){
+    public void run(){
         Socket _socket;
         
         try {
-            _socket = new Socket(Variables.nodo2, Variables.puerto+1);
+            _socket = new Socket(Variables.nodo3, Variables.puerto+1);
             DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
             DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
             //sleep(5000);

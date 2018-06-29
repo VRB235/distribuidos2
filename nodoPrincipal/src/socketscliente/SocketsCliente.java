@@ -22,10 +22,15 @@ public class SocketsCliente {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        /*Servidor _servidor = new Servidor();
-        _servidor.start();*/
+        Servidor _servidor = new Servidor();
         Cliente _cliente = new Cliente();
-        _cliente.start();
+        
+        Thread _threadServidor = new Thread(_servidor);
+        Thread _threadCliente = new Thread(_cliente);
+        
+        
+        _threadServidor.start();
+        _threadCliente.start();
       
         
         

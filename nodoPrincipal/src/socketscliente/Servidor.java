@@ -16,21 +16,20 @@ import java.util.Random;
  *
  * @author leona
  */
-public class Servidor extends Thread {
+public class Servidor implements Runnable {
     
     Socket _socket;
     
     public Servidor (){
         _socket = null;
     }
-    
+
     @Override
-    public void start (){
-        
+    public void run() {
         try {
-            
+            ServerSocket _serverSocket;
             while(true){
-                ServerSocket _serverSocket = new ServerSocket(1237);
+                _serverSocket = new ServerSocket(Variables.puerto);
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
                 System.out.println("Cliente aceptado: "+_socket.getInetAddress());
@@ -41,7 +40,7 @@ public class Servidor extends Thread {
                     _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
                     String _peticion = _dataInputStream.readUTF();
                     System.out.println(_peticion + "Cliente: "+_socket.getInetAddress());
-                    _dataOutputStream.writeUTF("Chao");
+                    _dataOutputStream.writeUTF("ack");
                     
                       
                 } 
@@ -58,7 +57,6 @@ public class Servidor extends Thread {
         
             System.out.println("Error "+e.getMessage());
         }
-        
     }
     
 }
