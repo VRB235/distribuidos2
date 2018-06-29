@@ -24,47 +24,40 @@ public class Cliente implements Runnable {
     @Override
     public void run() {
         Socket _socket;
-        while(true){
-                try {
-                _socket = new Socket(Variables.nodo2, Variables.puerto);
-                DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
-                DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
-                sleep(5000);
-                _dataOutputStream.writeUTF("sync");
+        try {
+            _socket = new Socket(Variables.nodo2, Variables.puerto);
+            DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
+            DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
 
-                String _respuesta = _dataInputStream.readUTF();
-                System.out.println(_respuesta); 
+            sleep(5000);
+            _dataOutputStream.writeUTF("sync");
 
-                if(_respuesta.equals("ack")){
-                    ObjectOutputStream _out = new ObjectOutputStream(_socket.getOutputStream());
-                    ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
+            String _respuesta = _dataInputStream.readUTF();
+            System.out.println(_respuesta); 
 
-                    Transporte _transporte = new Transporte();
+            if(_respuesta.equals("ack")){
+                ObjectOutputStream _out = new ObjectOutputStream(_socket.getOutputStream());
+                ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
 
-                    _out.writeObject(_transporte);
-                }
+                Transporte _transporte = new Transporte();
 
-
-
-                 _dataInputStream.close();
-                 _dataOutputStream.close();
-                 _socket.close();
-
-
-            } catch (IOException ex) {
-
-                System.out.println("Error al crear los stream de entradas y salidad: "
-                        + ex.getMessage());
-
-            }catch(Exception e){
-
-                System.out.println(e.getMessage());
-
+                _out.writeObject(_transporte);
+                _dataInputStream.close();
+                _dataOutputStream.close();
+                _socket.close();
             }
+
+
+
+        } catch (IOException ex) {
+
+            System.out.println("Error al crear los stream de entradas y salidad: "
+                    + ex.getMessage());
+
+        }catch(Exception e){
+
+            System.out.println(e.getMessage());
+
         }
-        
     }
-    
-    
-    
 }
