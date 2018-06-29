@@ -22,7 +22,7 @@ public class Cliente extends Thread {
         Socket _socket;
         
         try {
-            _socket = new Socket(Variables.nodo1, Variables.puerto);
+            _socket = new Socket(Variables.nodo2, Variables.puerto);
             DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
             DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
             sleep(5000);
