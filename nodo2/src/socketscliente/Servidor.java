@@ -34,8 +34,8 @@ public class Servidor implements Runnable {
         try {
             ObjectOutputStream _out;
             ObjectInputStream _in;
+            ServerSocket _serverSocket = new ServerSocket(Variables.puerto);
             while(true){
-                ServerSocket _serverSocket = new ServerSocket(Variables.puerto);
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
                 System.out.println("Cliente aceptado: "+_socket.getInetAddress());
@@ -56,6 +56,9 @@ public class Servidor implements Runnable {
                         System.out.println("Transporte con "+_transporte.getPaquete()+ " paquetes");
                         
                     }
+                    if(_peticion.equals("close")){
+                        break;
+                    }
                    
                     
                     
@@ -64,13 +67,16 @@ public class Servidor implements Runnable {
                 } catch (ClassNotFoundException ex) { 
                     Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
                 }
-        _dataOutputStream.close();
+                _dataOutputStream.close();
+                
+            }
+        
         _socket.close();
         
         /*Cliente _cliente = new Cliente();
                     _cliente.start();*/
 
-        }
+        
             
             
         } catch (IOException e) {

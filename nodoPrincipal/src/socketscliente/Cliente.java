@@ -24,40 +24,48 @@ public class Cliente implements Runnable {
     @Override
     public void run() {
         Socket _socket;
-        try {
-            _socket = new Socket(Variables.nodo2, Variables.puerto);
-            DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
-            DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
+        while(true){
+            try {
+                _socket = new Socket(Variables.nodo2, Variables.puerto);
+                DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
+                DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
 
-            sleep(5000);
-            _dataOutputStream.writeUTF("sync");
+                sleep(5000);
+                _dataOutputStream.writeUTF("sync");
 
-            String _respuesta = _dataInputStream.readUTF();
-            System.out.println(_respuesta); 
+                String _respuesta = _dataInputStream.readUTF();
+                System.out.println(_respuesta); 
 
-            if(_respuesta.equals("ack")){
-                ObjectOutputStream _out = new ObjectOutputStream(_socket.getOutputStream());
-                ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
+                if(_respuesta.equals("ack")){
+                    ObjectOutputStream _out = new ObjectOutputStream(_socket.getOutputStream());
+                    ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
 
-                Transporte _transporte = new Transporte();
+                    Transporte _transporte = new Transporte();
 
-                _out.writeObject(_transporte);
-                _dataInputStream.close();
-                _dataOutputStream.close();
-                _socket.close();
+                    _out.writeObject(_transporte);
+                    _dataInputStream.close();
+                    _dataOutputStream.close();
+                    
+                }
+                
+                if(_respuesta.equals("close")){
+                    _socket.close();
+                }
+
+
+
+            } catch (IOException ex) {
+
+                System.out.println("Error al crear los stream de entradas y salidad: "
+                        + ex.getMessage());
+
+            }catch(Exception e){
+
+                System.out.println(e.getMessage());
+
             }
-
-
-
-        } catch (IOException ex) {
-
-            System.out.println("Error al crear los stream de entradas y salidad: "
-                    + ex.getMessage());
-
-        }catch(Exception e){
-
-            System.out.println(e.getMessage());
-
         }
+        
+        
     }
 }
