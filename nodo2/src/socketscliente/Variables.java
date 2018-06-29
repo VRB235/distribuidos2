@@ -12,6 +12,6 @@ package socketscliente;
 public class Variables {
     
     public static final String nodo3 = "192.168.1.100";
-    public static final int puerto = 12341;
+    public static final int puerto = 12343;
     
 }

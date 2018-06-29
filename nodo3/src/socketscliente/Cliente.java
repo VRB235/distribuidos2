@@ -15,14 +15,21 @@ import java.util.TimerTask;
  *
  * @author leona
  */
-public class Cliente extends Thread {
+public class Cliente implements Runnable {
+    
+    private Transporte _transporte;
+    
+    public void enviarTransporte(Transporte _transporte){
+        this._transporte = _transporte;
+        this._transporte.setPaquete(_transporte.getPaquete()+1);
+    }
     
     @Override
-    public void start(){
+    public void run(){
         Socket _socket;
         
         try {
-            _socket = new Socket(Variables.nodo2, Variables.puerto+1);
+            _socket = new Socket(Variables.nodo4, Variables.puerto);
             DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
             DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
             //sleep(5000);
