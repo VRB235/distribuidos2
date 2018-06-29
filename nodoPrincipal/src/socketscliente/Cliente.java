@@ -9,6 +9,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.TimerTask;
 
 /**
  *
@@ -18,14 +19,13 @@ public class Cliente extends Thread {
     
     @Override
     public void start(){
-        
         Socket _socket;
         
         try {
             _socket = new Socket(Variables.nodo1, Variables.puerto);
             DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
             DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
-            
+            sleep(5000);
             _dataOutputStream.writeUTF("Hola Anderson!!!");
             System.out.println(_dataInputStream.readUTF()); 
 
