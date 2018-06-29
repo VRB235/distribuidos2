@@ -37,6 +37,7 @@ public class Servidor implements Runnable {
             ObjectInputStream _in;
             ServerSocket _serverSocket = new ServerSocket(Variables.puerto);
             while(true){
+                
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
                 System.out.println("Cliente aceptado: "+_socket.getInetAddress());
