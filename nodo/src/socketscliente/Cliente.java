@@ -22,10 +22,12 @@ public class Cliente extends Thread {
         Socket _socket;
         
         try {
-            _socket = new Socket(Variables.nodo4, Variables.puerto+1);
+            _socket = new Socket("192.168.1.100", 1234);
             DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
             DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
             
+            
+            System.out.println("ENTRANDO");
             _dataOutputStream.writeUTF("Hola Anderson!!!");
             System.out.println(_dataInputStream.readUTF()); 
 

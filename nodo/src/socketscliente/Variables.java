@@ -14,7 +14,7 @@ public class Variables {
     public static final String nodo1 = "192.168.1.101";
     public static final String nodo2 = "192.168.1.101";
     public static final String nodo3 = "192.168.1.100";
-    public static final String nodo4 = "127.0.0.4";
+    public static final String nodo4 = "192.168.1.100";
     public static final int puerto = 24618;
     
 }
