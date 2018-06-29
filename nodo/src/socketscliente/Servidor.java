@@ -30,7 +30,7 @@ public class Servidor extends Thread {
         try {
             
             while(true){
-                ServerSocket _serverSocket = new ServerSocket(1237);
+                ServerSocket _serverSocket = new ServerSocket(Variables.puerto+1);
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
                 System.out.println("Cliente aceptado: "+_socket.getInetAddress());
@@ -48,8 +48,8 @@ public class Servidor extends Thread {
         _dataOutputStream.close();
         _socket.close();
         
-        /*Cliente _cliente = new Cliente();
-                    _cliente.start();*/
+        Cliente _cliente = new Cliente();
+                    _cliente.start();
 
         }
             
