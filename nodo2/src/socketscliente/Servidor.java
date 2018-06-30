@@ -31,51 +31,27 @@ public class Servidor implements Runnable {
     @Override
     public void run (){
         Cliente _cliente = new Cliente();
-        Thread _threadCliente;
+        
         try {
-            ObjectOutputStream _out;
-            ObjectInputStream _in;
+            
             ServerSocket _serverSocket = new ServerSocket(1232);
+            AtenderCliente _atenderCliente = new AtenderCliente(_socket, _serverSocket, _cliente);
+            Thread _threadAtenderCliente;
             while(true){
                 
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
-                Thread.sleep(20000);
-                System.out.println("Cliente aceptado: "+_socket.getInetAddress());
                 
-                DataOutputStream _dataOutputStream = null;
-                try (DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream())) {
-                    
-                    _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
-                    String _peticion = _dataInputStream.readUTF();
-                    System.out.println(_peticion + "Cliente: "+_socket.getInetAddress());
-                    
-                    if(_peticion.equals("sync")){
-                        _dataOutputStream.writeUTF("ack");
-                        _out = new ObjectOutputStream(_socket.getOutputStream());
-                        _in = new ObjectInputStream(_socket.getInputStream());
-                        
-                        Transporte _transporte = (Transporte) _in.readObject();
-                        System.out.println("Transporte con "+_transporte.getPaquete()+ " paquetes");
-                        _transporte.setPaquete(_transporte.getPaquete()-2);
-                        _cliente.enviarTransporte(_transporte);
-                        _threadCliente = new Thread(_cliente);
-                        _threadCliente.start(); 
-                    }
-                    if(_peticion.equals("close")){
-                        break;
-                    }
-                   
-                    
-                    
-                    
-                      
-                } catch (ClassNotFoundException ex) { 
-                    Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                _threadAtenderCliente = new Thread(_atenderCliente);
+                _threadAtenderCliente.run();
+                
+                if(1==2){
+                    break;
                 }
-                _dataOutputStream.close();
                 
             }
+            
+            
         
         _socket.close();
         
@@ -88,8 +64,6 @@ public class Servidor implements Runnable {
         } catch (IOException e) {
         
             System.out.println("Error "+e.getMessage());
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
