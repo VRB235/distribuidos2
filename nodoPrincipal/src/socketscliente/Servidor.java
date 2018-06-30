@@ -30,6 +30,11 @@ public class Servidor implements Runnable {
 
     @Override
     public void run() {
+       /* LeeFichero _leer = new LeeFichero();
+        EscribeFichero _escribir = new EscribeFichero();
+        if(_leer.leer()<=3){
+            _escribir.escribir(_leer.leer()+1); 
+        }*/
         ObjectOutputStream _out;
         ObjectInputStream _in;
         try {
@@ -62,8 +67,9 @@ public class Servidor implements Runnable {
                         if(_transporte.getPaquetes().size()!=0){
                             _pasarACliente = new PasarACliente();
                             _pasarACliente.enviarTransporte(_transporte);
-                            _theadPasarACliente = new Thread(_pasarACliente);
-                            _theadPasarACliente.start();
+                                _theadPasarACliente = new Thread(_pasarACliente);
+                                _theadPasarACliente.start();
+                            
                         }else{
                             System.out.println("SIMULACIÓN TERMINADA");
                         }

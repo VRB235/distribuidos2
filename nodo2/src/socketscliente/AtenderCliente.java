@@ -37,6 +37,11 @@ public class AtenderCliente implements Runnable {
     
     @Override
     synchronized public void run() {
+        /*LeeFichero _leer = new LeeFichero();
+        EscribeFichero _escribir = new EscribeFichero();
+        if(_leer.leer()<=3){
+            _escribir.escribir(_leer.leer()+1); 
+        }*/
         try {
             Thread.sleep(20000);
         } catch (InterruptedException ex) {

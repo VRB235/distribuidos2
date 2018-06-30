@@ -30,6 +30,7 @@ public class Servidor implements Runnable {
     
     @Override
     public void run (){
+        
         Cliente _cliente = new Cliente();
         
         try {
@@ -44,8 +45,11 @@ public class Servidor implements Runnable {
                 _atenderCliente = new AtenderCliente(_socket, _serverSocket, _cliente);
                 
                 _threadAtenderCliente = new Thread(_atenderCliente);
-                _threadAtenderCliente.start();
-                
+                /*
+                LeeFichero _leer = new LeeFichero();
+                if(_leer.leer()<3){*/
+                    _threadAtenderCliente.start();
+                //}
                 if(1==2){
                     break;
                 }

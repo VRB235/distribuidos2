@@ -30,6 +30,11 @@ public class Servidor implements Runnable {
     
     @Override
     public void run (){
+        /*LeeFichero _leer = new LeeFichero();
+        EscribeFichero _escribir = new EscribeFichero();
+        if(_leer.leer()<=3){
+            _escribir.escribir(_leer.leer()+1); 
+        }*/
         Cliente _cliente = new Cliente();
         
         try {
