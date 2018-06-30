@@ -64,11 +64,9 @@ public class Cliente implements Runnable {
                     _out.writeObject(_transporte);
                     _dataInputStream.close();
                     _dataOutputStream.close();
-                    
-                }
-                
-                if(_respuesta.equals("close")){
                     _socket.close();
+                    break;
+                    
                 }
 
 
