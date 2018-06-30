@@ -19,7 +19,7 @@ public class SocketsCliente {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // TODO code application logic here
 
         Servidor _servidor = new Servidor();
@@ -30,7 +30,14 @@ public class SocketsCliente {
         
         
         _threadServidor.start();
-        _threadCliente.start();
+        
+        for (int i = 0; i < 2; i++) {
+            _threadCliente.sleep(5000);
+            _threadCliente = new Thread(_cliente);
+            _threadCliente.start();
+        }
+        
+        
       
         
         

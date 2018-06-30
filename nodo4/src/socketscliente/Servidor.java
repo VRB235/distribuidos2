@@ -31,7 +31,7 @@ public class Servidor implements Runnable {
     @Override
     public void run (){
         Cliente _cliente = new Cliente();
-        Thread _threadCliente = new Thread(_cliente);
+        Thread _threadCliente;
         try {
             ObjectOutputStream _out;
             ObjectInputStream _in;
@@ -57,6 +57,7 @@ public class Servidor implements Runnable {
                         System.out.println("Transporte con "+_transporte.getPaquete()+ " paquetes");
                         _transporte.setPaquete(_transporte.getPaquete()-1);
                         _cliente.enviarTransporte(_transporte);
+                        _threadCliente = new Thread(_cliente);
                         _threadCliente.start(); 
                     }
                     if(_peticion.equals("close")){
