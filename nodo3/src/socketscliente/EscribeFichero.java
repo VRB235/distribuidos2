@@ -10,7 +10,7 @@ public class EscribeFichero
         
         try
         {
-            PrintWriter writer = new PrintWriter("stats3.txt", "UTF-8");
+            PrintWriter writer = new PrintWriter("C:\\Users\\GOMEZ\\Downloads\\ProyectoDistribuidos2\\stats3.txt", "UTF-8");
             
             for (int i = 0; i < 3; i++) {
                 writer.println(_lineas[i]);
