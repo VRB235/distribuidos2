@@ -59,7 +59,11 @@ public class AtenderCliente implements Runnable {
                         
                         Transporte _transporte = (Transporte) _in.readObject();
                         System.out.println("Transporte con "+_transporte.getPaquete()+ " paquetes");
-                        _transporte.setPaquete(_transporte.getPaquete()-2);
+                        for (int i = 0; i < 1; i++) {
+                            Thread.sleep(10000);
+                            System.out.println("Paquete Procesado");
+                            _transporte.setPaquete(_transporte.getPaquete()-1);
+                        }
                         _cliente.enviarTransporte(_transporte);
                         _threadCliente = new Thread(_cliente);
                         _threadCliente.start(); 
@@ -73,6 +77,8 @@ public class AtenderCliente implements Runnable {
                 } catch (ClassNotFoundException ex) { 
                     Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
+            Logger.getLogger(AtenderCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(AtenderCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
