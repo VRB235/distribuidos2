@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 public class Servidor implements Runnable {
     
     Socket _socket;
+    int  enEspera = 0;
     
     public Servidor (){
         _socket = null;
@@ -36,6 +37,9 @@ public class Servidor implements Runnable {
             _escribir.escribir(_leer.leer()+1); 
         }*/
         Cliente _cliente = new Cliente();
+        String [] _linea;
+        LeeFichero _leer = new LeeFichero();
+        EscribeFichero _escribir = new EscribeFichero();
         
         try {
             
@@ -47,7 +51,11 @@ public class Servidor implements Runnable {
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
                 _atenderCliente = new AtenderCliente(_socket, _serverSocket, _cliente);
-                
+                _linea =_leer.leer().split(":");
+                    enEspera = Integer.parseInt(_linea[2]) ;
+                    enEspera++;
+                    _escribir.escribir(enEspera+":"+_linea[2]+":"+_linea[3]);
+                    System.out.println("En Espera: "+enEspera+" Recibidos  "+_linea[2]+" Enviados: "+_linea[3]);
                 _threadAtenderCliente = new Thread(_atenderCliente);
                 _threadAtenderCliente.start();
                 

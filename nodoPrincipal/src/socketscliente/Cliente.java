@@ -31,7 +31,10 @@ public class Cliente implements Runnable {
     }
 
     @Override
-    synchronized public void run() {
+    public void run() {
+        LeeFichero _leer = new LeeFichero();
+        EscribeFichero _escribir = new EscribeFichero();
+        String _linea[];
         ArrayList <String> _nodos;
         ArrayList <String> _puertos;
         _nodos = new ArrayList<>();
@@ -69,8 +72,11 @@ public class Cliente implements Runnable {
                     }
                     
                     _out.writeObject(_transporte);
+                    _linea =_leer.leer().split(":");
+                    enviados = Integer.parseInt(_linea[3]) ;
                     enviados++;
-                    System.out.println("En Espera: "+enEspera+" Recibidos  "+recibidos+"Enviados: "+enviados);
+                    _escribir.escribir(_linea[1]+":"+_linea[2]+":"+enviados);
+                    System.out.println("En Espera: "+_linea[1]+" Recibidos  "+_linea[2]+" Enviados: "+enviados);
                     _dataInputStream.close();
                     _dataOutputStream.close();
                     _socket.close();

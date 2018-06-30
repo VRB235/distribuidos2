@@ -23,6 +23,9 @@ import java.util.logging.Logger;
 public class Servidor implements Runnable {
     
     Socket _socket;
+    int enEspera = 0;
+    int recibidos = 0;
+   
     
     public Servidor (){
         _socket = null;
@@ -43,7 +46,9 @@ public class Servidor implements Runnable {
             _serverSocket = new ServerSocket(1231);
             PasarACliente _pasarACliente;
             Thread _theadPasarACliente;
-            
+            String [] _linea;
+            LeeFichero _leer = new LeeFichero();
+            EscribeFichero _escribir = new EscribeFichero();
             while(true){
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
@@ -58,12 +63,28 @@ public class Servidor implements Runnable {
                     
                     if(_peticion.equals("sync"))
                     {
+                        
+                        _linea =_leer.leer().split(":");
+                        System.out.println("En espera "+_linea[1]);
+                        enEspera = Integer.parseInt(_linea[1]) ;
+                        enEspera++;
+                        _escribir.escribir(enEspera+":"+_linea[2]+":"+_linea[3]);
+                        System.out.println("En Espera: "+enEspera+" Recibidos  "+_linea[2]+" Enviados: "+_linea[3]);
                         _dataOutputStream.writeUTF("ack");
                         _out = new ObjectOutputStream(_socket.getOutputStream());
                         _in = new ObjectInputStream(_socket.getInputStream());
                         Transporte _transporte = (Transporte) _in.readObject();
                         System.out.println("EL TRANSPORTE HA LLEGADO CON "+_transporte.getPaquetes().size() + " paquetes");
-                        
+                        _linea =_leer.leer().split(":");
+                        System.out.println("En espera "+_linea[1]);
+                        enEspera = Integer.parseInt(_linea[1]) ;
+                        enEspera--;
+                        _escribir.escribir(enEspera+":"+_linea[2]+":"+_linea[3]);
+                        System.out.println("En Espera: "+enEspera+" Recibidos  "+_linea[2]+" Enviados: "+_linea[3]);
+                        recibidos = Integer.parseInt(_linea[2]) ;
+                        recibidos++;
+                        _escribir.escribir(_linea[1]+":"+recibidos+":"+_linea[3]);
+                        System.out.println("En Espera: "+_linea[1]+" Recibidos  "+recibidos+" Enviados: "+_linea[3]);
                         if(_transporte.getPaquetes().size()!=0){
                             _pasarACliente = new PasarACliente();
                             _pasarACliente.enviarTransporte(_transporte);

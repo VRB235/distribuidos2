@@ -28,6 +28,8 @@ public class AtenderCliente implements Runnable {
     ObjectInputStream _in;
     Thread _threadCliente;
     Cliente _cliente;
+    int enEspera = 0;
+    int recibidos = 0;
     
     public AtenderCliente (Socket _socket, ServerSocket _serverSocket, Cliente _cliente){
         this._socket = _socket;
@@ -42,6 +44,9 @@ public class AtenderCliente implements Runnable {
         if(_leer.leer()<=3){
             _escribir.escribir(_leer.leer()+1); 
         }*/
+        String [] _linea;
+        LeeFichero _leer = new LeeFichero();
+        EscribeFichero _escribir = new EscribeFichero();
         try {
             Thread.sleep(20000);
         } catch (InterruptedException ex) {
@@ -63,7 +68,17 @@ public class AtenderCliente implements Runnable {
                         _out = new ObjectOutputStream(_socket.getOutputStream());
                         _in = new ObjectInputStream(_socket.getInputStream());
                           
-                        Transporte _transporte = (Transporte) _in.readObject();                  
+                        Transporte _transporte = (Transporte) _in.readObject(); 
+                        _linea =_leer.leer().split(":");
+                        System.out.println("En espera "+_linea[1]);
+                        enEspera = Integer.parseInt(_linea[1]) ;
+                        enEspera--;
+                        _escribir.escribir(enEspera+":"+_linea[2]+":"+_linea[3]);
+                        System.out.println("En Espera: "+enEspera+" Recibidos  "+_linea[2]+" Enviados: "+_linea[3]);
+                        recibidos = Integer.parseInt(_linea[2]) ;
+                        recibidos++;
+                        _escribir.escribir(_linea[1]+":"+recibidos+":"+_linea[3]);
+                        System.out.println("En Espera: "+_linea[1]+" Recibidos  "+recibidos+" Enviados: "+_linea[3]);
                         ArrayList<Paquete> _paquetes = _transporte.getPaquetes();
                         if(_paquetes.size()!=0)
                         {
