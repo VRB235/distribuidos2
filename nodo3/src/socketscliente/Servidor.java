@@ -39,6 +39,7 @@ public class Servidor implements Runnable {
             while(true){
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
+                Thread.sleep(20000);
                 System.out.println("Cliente aceptado: "+_socket.getInetAddress());
                 
                 DataOutputStream _dataOutputStream = null;
@@ -86,6 +87,8 @@ public class Servidor implements Runnable {
         } catch (IOException e) {
         
             System.out.println("Error "+e.getMessage());
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
