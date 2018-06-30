@@ -79,7 +79,7 @@ public class AtenderCliente implements Runnable {
 
                             if(_paquetes.size()!=0){
                                 if(_paquetes.size()<5){
-                                    for (int i = 0; i < 3; i++) {
+                                    for (int i = 0; i < 1; i++) {
                                         System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
                                         System.out.println("Subiendo Paquete");
                                         Thread.sleep(10000);
