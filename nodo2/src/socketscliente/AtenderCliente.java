@@ -69,6 +69,9 @@ public class AtenderCliente implements Runnable {
                         _in = new ObjectInputStream(_socket.getInputStream());
                           
                         Transporte _transporte = (Transporte) _in.readObject(); 
+                        
+                        
+                        
                         _linea =_leer.leer().split(":");
                         System.out.println("En espera "+_linea[1]);
                         enEspera = Integer.parseInt(_linea[1]) ;
