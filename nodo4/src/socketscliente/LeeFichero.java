@@ -12,7 +12,7 @@ public class LeeFichero {
       try {
          // Apertura del fichero y creacion de BufferedReader para poder
          // hacer una lectura comoda (disponer del metodo readLine()).
-         archivo = new File ("C:\\Users\\GOMEZ\\Downloads\\ProyectoDistribuidos2\\stats4.txt");
+         archivo = new File ("C:\\Users\\Andy\\Desktop\\Proyecto2 Distribuidos\\distribuidos2\\nodo4\\stats4.txt");
          fr = new FileReader (archivo);
          br = new BufferedReader(fr);
 
