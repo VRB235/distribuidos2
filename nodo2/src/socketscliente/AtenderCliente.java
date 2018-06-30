@@ -35,7 +35,7 @@ public class AtenderCliente implements Runnable {
     }
     
     @Override
-    public void run() {
+    synchronized public void run() {
         try {
             Thread.sleep(20000);
         } catch (InterruptedException ex) {
@@ -60,11 +60,11 @@ public class AtenderCliente implements Runnable {
                         Transporte _transporte = (Transporte) _in.readObject();
                         System.out.println("Transporte con "+_transporte.getPaquete()+ " paquetes");
                         for (int i = 0; i < 1; i++) {
+                            System.out.println("Bajando Paquete");
                             Thread.sleep(10000);
-                            System.out.println("Paquete Procesado");
                             _transporte.setPaquete(_transporte.getPaquete()-1);
+                            System.out.println("Paquete Bajado");
                         }
-                        
                         _cliente.enviarTransporte(_transporte);
                         _threadCliente = new Thread(_cliente);
                         _threadCliente.start(); 

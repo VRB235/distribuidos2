@@ -42,9 +42,6 @@ public class Cliente implements Runnable {
         _puertos.add(String.valueOf(Variables.puerto3));
         _puertos.add(String.valueOf(Variables.puerto4));
         int i = 1;
-        for (int j = 0; j < 4; j++) {
-            System.out.println(_nodos.get(j));
-        }
         Socket _socket;
         while(true){
             try {
@@ -63,6 +60,7 @@ public class Cliente implements Runnable {
 
                     Transporte _transporte = new Transporte();
                     Thread.sleep(20000);
+                    _transporte.setPaquete(5);
                     _out.writeObject(_transporte);
                     _dataInputStream.close();
                     _dataOutputStream.close();

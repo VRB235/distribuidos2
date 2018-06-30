@@ -42,9 +42,6 @@ public class Cliente implements Runnable {
         _puertos.add(String.valueOf(Variables.puerto3));
         _puertos.add(String.valueOf(Variables.puerto4));
         int i = 1;
-        for (int j = 0; j < 4; j++) {
-            System.out.println(_nodos.get(j));
-        }
         Socket _socket;
         while(true){
             try {
