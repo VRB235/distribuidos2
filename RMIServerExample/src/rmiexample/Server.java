@@ -34,7 +34,7 @@ public class Server implements Runnable {
                 }
                 
                 @Override
-                public String primedio(long tiempo) throws RemoteException {
+                public String promedio(long tiempo) throws RemoteException {
                     System.out.println("Promedio Recibido: "+tiempo);
                     _escribirFichero.escribir(tiempo);
                     return "Servidor ACK/promedio";

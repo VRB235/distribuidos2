@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rmiexample.RMIClientExample;
@@ -76,6 +77,8 @@ public class AtenderCliente implements Runnable {
                    /////RMI
                         RMIClientExample rmi = new RMIClientExample();
                         rmi.sync();
+                        
+                        
                    ////FIN  RMI
                         
                         _linea =_leer.leer().split(":");
@@ -96,6 +99,7 @@ public class AtenderCliente implements Runnable {
                                     System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
                                     System.out.println("Bajando Paquete");
                                     Thread.sleep(10000);
+                                    rmi.enviarpromedio(new Date().getTime() - _transporte.getPaquetes().get(i).getTime());
                                     _paquetes.remove(i);
                                     System.out.println("Paquetes Restantes : "+_transporte.getPaquetes().size());
                                     System.out.println("Paquete Bajado");
