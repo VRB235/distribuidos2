@@ -15,11 +15,11 @@ import java.util.Scanner;
  * @author karol
  */
 public class RMIClientExample {
-	//private static final String IP = "192.168.1.100"; // Puedes cambiar a localhost
+	private static final String IP = "192.168.1.100"; // Puedes cambiar a localhost
 	//private static final int PUERTO = 5555; //Si cambias aquí el puerto, recuerda cambiarlo en el servidor
 	
     public  void sync () throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry();
+        Registry registry = LocateRegistry.getRegistry(IP,Registry.REGISTRY_PORT);
         TestRemote testRemote = (TestRemote) registry.lookup("Test"); //Buscar en el registro...
         System.out.println(testRemote.enviar("sync"));
     }
