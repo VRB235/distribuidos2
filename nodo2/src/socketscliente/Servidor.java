@@ -44,7 +44,7 @@ public class Servidor implements Runnable {
                 _atenderCliente = new AtenderCliente(_socket, _serverSocket, _cliente);
                 
                 _threadAtenderCliente = new Thread(_atenderCliente);
-                _threadAtenderCliente.run();
+                _threadAtenderCliente.start();
                 
                 if(1==2){
                     break;
