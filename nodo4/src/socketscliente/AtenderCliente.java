@@ -58,15 +58,15 @@ public class AtenderCliente implements Runnable {
                         _in = new ObjectInputStream(_socket.getInputStream());
                         
                         Transporte _transporte = (Transporte) _in.readObject();
-                        int paquetes;
+                        int paquetes = _transporte.getPaquete();
                         for (int i = 0; i < 1; i++) {
                             System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquete()+ " paquetes");
                             System.out.println("Bajando Paquete");
                             Thread.sleep(10000);
-                            paquetes = _transporte.getPaquete();
-                            _transporte.setPaquete(paquetes--);
+                            paquetes--;
                             System.out.println("Paquete Bajado");
                         }
+                        _transporte.setPaquete(paquetes);
                         _cliente.enviarTransporte(_transporte);
                         _threadCliente = new Thread(_cliente);
                         _threadCliente.start(); 
