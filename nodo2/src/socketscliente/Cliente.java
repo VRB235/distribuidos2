@@ -41,7 +41,7 @@ public class Cliente implements Runnable {
         _puertos.add(String.valueOf(Variables.puerto2));
         _puertos.add(String.valueOf(Variables.puerto3));
         _puertos.add(String.valueOf(Variables.puerto4));
-        int i = 2;
+        int i = 0;
         Socket _socket;
         while(true){
             try {
@@ -60,6 +60,7 @@ public class Cliente implements Runnable {
 
                     Transporte _transporte = new Transporte();
                     Thread.sleep(20000);
+                    System.out.println("Enviando Trasporte con: "+_transporte.getPaquete()+ " paquetes");
                     _out.writeObject(_transporte);
                     _dataInputStream.close();
                     _dataOutputStream.close();

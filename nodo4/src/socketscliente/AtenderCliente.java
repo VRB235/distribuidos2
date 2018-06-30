@@ -64,6 +64,7 @@ public class AtenderCliente implements Runnable {
                             System.out.println("Bajando Paquete");
                             Thread.sleep(10000);
                             paquetes--;
+                            System.out.println("Paquetes Restantes : "+paquetes);
                             System.out.println("Paquete Bajado");
                         }
                         _transporte.setPaquete(paquetes);
