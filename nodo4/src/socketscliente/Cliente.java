@@ -44,6 +44,7 @@ public class Cliente implements Runnable {
                     ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
 
                     System.out.println("Envaindo a nodo Principal");
+                    Thread.sleep(20000);
                     _out.writeObject(_transporte);
                     _dataInputStream.close();
                     _dataOutputStream.close();

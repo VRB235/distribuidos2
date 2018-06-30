@@ -43,7 +43,7 @@ public class Cliente implements Runnable {
                     ObjectOutputStream _out = new ObjectOutputStream(_socket.getOutputStream());
                     ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
 
-
+                    Thread.sleep(20000);
                     _out.writeObject(_transporte);
                     _dataInputStream.close();
                     _dataOutputStream.close();
