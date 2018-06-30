@@ -36,6 +36,9 @@ public class Servidor implements Runnable {
             ServerSocket _serverSocket;
             DataOutputStream _dataOutputStream = null;
             _serverSocket = new ServerSocket(1231);
+            PasarACliente _pasarACliente;
+            Thread _theadPasarACliente;
+            
             while(true){
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
@@ -55,6 +58,15 @@ public class Servidor implements Runnable {
                         _in = new ObjectInputStream(_socket.getInputStream());
                         Transporte _transporte = (Transporte) _in.readObject();
                         System.out.println("EL TRANSPORTE HA LLEGADO CON "+_transporte.getPaquetes().size() + " paquetes");
+                        
+                        if(_transporte.getPaquetes().size()!=0){
+                            _pasarACliente = new PasarACliente();
+                            _pasarACliente.enviarTransporte(_transporte);
+                            _theadPasarACliente = new Thread(_pasarACliente);
+                            _theadPasarACliente.start();
+                        }else{
+                            System.out.println("SIMULACIÓN TERMINADA");
+                        }
                         
                         
                         

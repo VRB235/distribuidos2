@@ -60,23 +60,37 @@ public class AtenderCliente implements Runnable {
                         
                         Transporte _transporte = (Transporte) _in.readObject();
                         ArrayList<Paquete> _paquetes = _transporte.getPaquetes();
-                        for (int i = 0; i < 2; i++) {
-                            System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
-                            System.out.println("Bajando Paquete");
-                            Thread.sleep(10000);
-                            _paquetes.remove(i);
-                            System.out.println("Paquetes Restantes : "+_transporte.getPaquetes().size());
-                            System.out.println("Paquete Bajado");
+                        if(_paquetes.size()!=0)
+                        {
+                            if(_paquetes.size()>2){
+                                for (int i = 0; i < 2; i++) {
+                                    System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
+                                    System.out.println("Bajando Paquete");
+                                    Thread.sleep(10000);
+                                    _paquetes.remove(i);
+                                    System.out.println("Paquetes Restantes : "+_transporte.getPaquetes().size());
+                                    System.out.println("Paquete Bajado");
+                                }
+                            }else{
+                                for (int i = 0; i < _paquetes.size(); i++) {
+                                    _paquetes.remove(i);
+                                }
+                            }
+
+                            if(_paquetes.size()<5){
+                                for (int i = 0; i < 3; i++) {
+                                    System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
+                                    System.out.println("Subiendo Paquete");
+                                    Thread.sleep(10000);
+                                    _paquetes.add(new Paquete());
+                                    System.out.println("Subiendo Restantes : "+_transporte.getPaquetes().size());
+                                    System.out.println("Paquete Subido");
+                                }
+                            }
                         }
                         
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
-                            System.out.println("Subiendo Paquete");
-                            Thread.sleep(10000);
-                            _paquetes.add(new Paquete());
-                            System.out.println("Paquetes Restantes : "+_transporte.getPaquetes().size());
-                            System.out.println("Paquete Subido");
-                        }
+                        
+                        
                         _cliente.enviarTransporte(_transporte);
                         _threadCliente = new Thread(_cliente);
                         _threadCliente.start(); 
