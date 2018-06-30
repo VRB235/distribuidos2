@@ -73,11 +73,11 @@ public class AtenderCliente implements Runnable {
                                 }
                             }else{
                                 for (int i = 0; i < _paquetes.size(); i++) {
-                                    _paquetes.remove(i);
+                                    _paquetes.removeAll(_paquetes);
                                 }
                             }
 
-                            if(_paquetes.size()!=0){
+                            if(!_paquetes.isEmpty()){
                                 if(_paquetes.size()<5){
                                     for (int i = 0; i < 1; i++) {
                                         System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
