@@ -4,7 +4,7 @@ import java.io.*;
 
 public class LeeFichero {
     
-   public int leer() {
+   public String leer() {
       File archivo = null;
       FileReader fr = null;
       BufferedReader br = null;
@@ -12,17 +12,17 @@ public class LeeFichero {
       try {
          // Apertura del fichero y creacion de BufferedReader para poder
          // hacer una lectura comoda (disponer del metodo readLine()).
-         archivo = new File ("C:\\Users\\GOMEZ\\Downloads\\ProyectoDistribuidos2\\receptores.txt");
+         archivo = new File ("C:\\Users\\GOMEZ\\Downloads\\ProyectoDistribuidos2\\stats3.txt");
          fr = new FileReader (archivo);
          br = new BufferedReader(fr);
 
          // Lectura del fichero
          String linea;
-         while((linea=br.readLine())!=null)
-         {
-             return Integer.parseInt(linea);
+         String salida = "";
+         while((linea=br.readLine())!=null){
+             salida= salida+":"+linea;
          }
-         
+         return salida;
       }
       catch(Exception e){
          e.printStackTrace();
@@ -38,6 +38,6 @@ public class LeeFichero {
             e2.printStackTrace();
          }
       }
-      return 0;
+      return null;
    }
 }

@@ -22,13 +22,16 @@ import java.util.TimerTask;
 public class Cliente implements Runnable {
     
     public Transporte _transporte;
+    public int recibidos = 0;
+    public int enviados = 0;
+    public int enEspera = 0;
     
     public void enviarTransporte(Transporte _transporte){
         this._transporte = _transporte;
     }
 
     @Override
-    public void run() {
+    synchronized public void run() {
         ArrayList <String> _nodos;
         ArrayList <String> _puertos;
         _nodos = new ArrayList<>();
@@ -57,7 +60,6 @@ public class Cliente implements Runnable {
                 if(_respuesta.equals("ack")){
                     ObjectOutputStream _out = new ObjectOutputStream(_socket.getOutputStream());
                     ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
-
                     Transporte _transporte = new Transporte();
                     Thread.sleep(20000);
                     ArrayList<Paquete> _paquetes;
@@ -65,7 +67,10 @@ public class Cliente implements Runnable {
                     for (int j = 0; j < 5; j++) {
                         _paquetes.add(new Paquete());
                     }
+                    
                     _out.writeObject(_transporte);
+                    enviados++;
+                    System.out.println("En Espera: "+enEspera+" Recibidos  "+recibidos+"Enviados: "+enviados);
                     _dataInputStream.close();
                     _dataOutputStream.close();
                     _socket.close();

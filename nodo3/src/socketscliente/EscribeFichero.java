@@ -4,16 +4,19 @@ import java.io.*;
 
 public class EscribeFichero
 {
-    public void escribir(int _num)
+    public void escribir(String _texto)
     {
+        String[] _lineas = _texto.split(":");
         FileWriter fichero = null;
         PrintWriter pw = null;
         try
         {
-            fichero = new FileWriter("C:\\Users\\GOMEZ\\Downloads\\ProyectoDistribuidos2\\receptores.txt");
+            fichero = new FileWriter("C:\\Users\\GOMEZ\\Downloads\\ProyectoDistribuidos2\\stats3.txt");
             pw = new PrintWriter(fichero);
-
-                pw.println(_num);
+            for (int i = 0; i < 3; i++) {
+                pw.println(_lineas[i]);
+            }
+                
 
         } catch (Exception e) {
             e.printStackTrace();
