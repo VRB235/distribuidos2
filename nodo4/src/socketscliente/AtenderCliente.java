@@ -12,9 +12,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rmiexample.RMIClientExample;
 
 /**
  *
@@ -69,6 +72,12 @@ public class AtenderCliente implements Runnable {
                         _in = new ObjectInputStream(_socket.getInputStream());
                         
                         Transporte _transporte = (Transporte) _in.readObject();
+                        
+                   /////RMI
+                        RMIClientExample rmi = new RMIClientExample();
+                        rmi.sync();
+                   ////FIN  RMI
+                        
                         _linea =_leer.leer().split(":");
                         System.out.println("En espera "+_linea[1]);
                         enEspera = Integer.parseInt(_linea[1]) ;
@@ -127,6 +136,8 @@ public class AtenderCliente implements Runnable {
                 } catch (IOException ex) {
             Logger.getLogger(AtenderCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
+            Logger.getLogger(AtenderCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotBoundException ex) {
             Logger.getLogger(AtenderCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

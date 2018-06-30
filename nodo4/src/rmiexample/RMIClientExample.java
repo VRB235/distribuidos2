@@ -18,10 +18,9 @@ public class RMIClientExample {
 	//private static final String IP = "192.168.1.100"; // Puedes cambiar a localhost
 	//private static final int PUERTO = 5555; //Si cambias aquí el puerto, recuerda cambiarlo en el servidor
 	
-    public static void main(String[] args) throws RemoteException, NotBoundException {
+    public  void sync () throws RemoteException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry();
         TestRemote testRemote = (TestRemote) registry.lookup("Test"); //Buscar en el registro...
-        System.out.println(testRemote.enviar("JavaMexico"));
+        System.out.println(testRemote.enviar("sync"));
     }
 }
-

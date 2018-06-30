@@ -12,9 +12,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rmiexample.RMIClientExample;
 
 /**
  *
@@ -74,6 +77,12 @@ public class Servidor implements Runnable {
                         _out = new ObjectOutputStream(_socket.getOutputStream());
                         _in = new ObjectInputStream(_socket.getInputStream());
                         Transporte _transporte = (Transporte) _in.readObject();
+                        
+                   /////RMI
+                        RMIClientExample rmi = new RMIClientExample();
+                        rmi.sync();
+                   ////FIN  RMI
+                        
                         System.out.println("EL TRANSPORTE HA LLEGADO CON "+_transporte.getPaquetes().size() + " paquetes");
                         _linea =_leer.leer().split(":");
                         System.out.println("En espera "+_linea[1]);
@@ -107,6 +116,10 @@ public class Servidor implements Runnable {
                     
                       
                 } catch (ClassNotFoundException ex) { 
+                    Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NotBoundException ex) {
                     Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
                 }
         _dataOutputStream.close();
