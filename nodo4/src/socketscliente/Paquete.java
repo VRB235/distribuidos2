@@ -5,6 +5,7 @@
  */
 package socketscliente;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
  *
  * @author GOMEZ
  */
-public class Paquete {
+public class Paquete implements Serializable {
     
     private long _time;
     
