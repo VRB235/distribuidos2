@@ -17,6 +17,7 @@ public class Transporte implements Serializable  {
     private ArrayList<Paquete> _paquetes;
 
     public Transporte() {
+        _paquetes = new ArrayList<Paquete>();
     }
 
     public ArrayList<Paquete> getPaquetes() {
