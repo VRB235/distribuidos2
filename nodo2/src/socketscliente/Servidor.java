@@ -35,12 +35,13 @@ public class Servidor implements Runnable {
         try {
             
             ServerSocket _serverSocket = new ServerSocket(1232);
-            AtenderCliente _atenderCliente = new AtenderCliente(_socket, _serverSocket, _cliente);
+            AtenderCliente _atenderCliente;
             Thread _threadAtenderCliente;
             while(true){
                 
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
+                _atenderCliente = new AtenderCliente(_socket, _serverSocket, _cliente);
                 
                 _threadAtenderCliente = new Thread(_atenderCliente);
                 _threadAtenderCliente.run();
