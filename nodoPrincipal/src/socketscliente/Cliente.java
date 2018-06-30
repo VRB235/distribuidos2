@@ -26,11 +26,11 @@ public class Cliente implements Runnable {
         Socket _socket;
         while(true){
             try {
-                _socket = new Socket(Variables.nodo2, Variables.puerto);
+                _socket = new Socket(Variables.nodo2, 1232);
                 DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
                 DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
 
-                sleep(5000);
+                //sleep(5000);
                 _dataOutputStream.writeUTF("sync");
 
                 String _respuesta = _dataInputStream.readUTF();

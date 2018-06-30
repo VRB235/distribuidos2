@@ -29,7 +29,7 @@ public class Servidor implements Runnable {
         try {
             ServerSocket _serverSocket;
             while(true){
-                _serverSocket = new ServerSocket(Variables.puerto);
+                _serverSocket = new ServerSocket(1231);
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
                 System.out.println("Cliente aceptado: "+_socket.getInetAddress());

@@ -35,7 +35,7 @@ public class Servidor implements Runnable {
         try {
             ObjectOutputStream _out;
             ObjectInputStream _in;
-            ServerSocket _serverSocket = new ServerSocket(Variables.puerto);
+            ServerSocket _serverSocket = new ServerSocket(1233);
             while(true){
                 System.out.println("Esperando conexion...");
                 _socket = _serverSocket.accept();
