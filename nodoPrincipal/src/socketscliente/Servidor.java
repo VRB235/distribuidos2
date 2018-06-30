@@ -48,7 +48,7 @@ public class Servidor implements Runnable {
                     String _peticion = _dataInputStream.readUTF();
                     System.out.println(_peticion + "Cliente: "+_socket.getInetAddress());
                     
-                    if(_peticion.equals("ack"))
+                    if(_peticion.equals("sync"))
                     {
                         _dataOutputStream.writeUTF("ack");
                         _out = new ObjectOutputStream(_socket.getOutputStream());
