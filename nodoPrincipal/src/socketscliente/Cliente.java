@@ -60,7 +60,11 @@ public class Cliente implements Runnable {
 
                     Transporte _transporte = new Transporte();
                     Thread.sleep(20000);
-                    _transporte.setPaquete(5);
+                    ArrayList<Paquete> _paquetes;
+                    _paquetes = _transporte.getPaquetes();
+                    for (int j = 0; j < 5; j++) {
+                        _paquetes.add(new Paquete());
+                    }
                     _out.writeObject(_transporte);
                     _dataInputStream.close();
                     _dataOutputStream.close();

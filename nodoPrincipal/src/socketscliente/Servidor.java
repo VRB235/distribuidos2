@@ -54,7 +54,10 @@ public class Servidor implements Runnable {
                         _out = new ObjectOutputStream(_socket.getOutputStream());
                         _in = new ObjectInputStream(_socket.getInputStream());
                         Transporte _transporte = (Transporte) _in.readObject();
-                        System.out.println("EL TRANSPORTE HA LLEGADO CON "+_transporte.getPaquete() + " paquetes");
+                        System.out.println("EL TRANSPORTE HA LLEGADO CON "+_transporte.getPaquetes().size() + " paquetes");
+                        
+                        
+                        
                     }
                     
                     if(_peticion.equals("close")){

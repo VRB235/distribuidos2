@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,16 +59,25 @@ public class AtenderCliente implements Runnable {
                         _in = new ObjectInputStream(_socket.getInputStream());
                         
                         Transporte _transporte = (Transporte) _in.readObject();
-                        int paquetes = _transporte.getPaquete();
+                        ArrayList<Paquete> _paquetes = _transporte.getPaquetes();
                         for (int i = 0; i < 2; i++) {
-                            System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquete()+ " paquetes");
+                            System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
                             System.out.println("Bajando Paquete");
                             Thread.sleep(10000);
-                            paquetes--;
-                            System.out.println("Paquetes Restantes : "+paquetes);
+                            _paquetes.remove(i);
+                            System.out.println("Paquetes Restantes : "+_transporte.getPaquetes().size());
                             System.out.println("Paquete Bajado");
                         }
-                        _transporte.setPaquete(paquetes);
+                        
+                        for (int i = 0; i < 1; i++) {
+                            System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
+                            System.out.println("Subiendo Paquete");
+                            Thread.sleep(10000);
+                            _paquetes.add(new Paquete());
+                            System.out.println("Subiendo Restantes : "+_transporte.getPaquetes().size());
+                            System.out.println("Paquete Subido");
+                        }
+                        
                         _cliente.enviarTransporte(_transporte);
                         _threadCliente = new Thread(_cliente);
                         _threadCliente.start(); 

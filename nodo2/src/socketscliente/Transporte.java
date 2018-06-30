@@ -6,6 +6,7 @@
 package socketscliente;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,16 +14,18 @@ import java.io.Serializable;
  */
 public class Transporte implements Serializable  {
     
-    private int paquete;
+    private ArrayList<Paquete> _paquetes;
 
     public Transporte() {
-        
-    } 
-    public int getPaquete() {
-        return paquete;
     }
 
-    public void setPaquete(int paquete) {
-        this.paquete = paquete;
+    public ArrayList<Paquete> getPaquetes() {
+        return _paquetes;
     }
+
+    public void setPaquetes(ArrayList<Paquete> _paquetes) {
+        this._paquetes = _paquetes;
+    }
+
+    
 }

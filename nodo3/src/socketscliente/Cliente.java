@@ -59,7 +59,7 @@ public class Cliente implements Runnable {
                     ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
 
                     Thread.sleep(20000);
-                    System.out.println("Enviando Trasporte con: "+_transporte.getPaquete()+ " paquetes");
+                    System.out.println("Enviando Trasporte con: "+_transporte.getPaquetes().size()+ " paquetes");
                     _out.writeObject(_transporte);
                     _dataInputStream.close();
                     _dataOutputStream.close();
