@@ -24,13 +24,11 @@ public class Cliente implements Runnable {
     @Override
     public void run() {
         Socket _socket;
-        while(true){
             try {
                 _socket = new Socket(Variables.nodo2, 1232);
                 DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
                 DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
 
-                //sleep(5000);
                 _dataOutputStream.writeUTF("sync");
 
                 String _respuesta = _dataInputStream.readUTF();
@@ -64,7 +62,6 @@ public class Cliente implements Runnable {
                 System.out.println(e.getMessage());
 
             }
-        }
         
         
     }

@@ -55,7 +55,7 @@ public class Servidor implements Runnable {
                         
                         Transporte _transporte = (Transporte) _in.readObject();
                         System.out.println("Transporte con "+_transporte.getPaquete()+ " paquetes");
-                        _transporte.setPaquete(_transporte.getPaquete()-2);
+                        _transporte.setPaquete(_transporte.getPaquete()-3);
                         _cliente.enviarTransporte(_transporte);
                         _threadCliente.start(); 
                     }
