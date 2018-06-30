@@ -52,7 +52,7 @@ public class Servidor implements Runnable {
                 _socket = _serverSocket.accept();
                 _atenderCliente = new AtenderCliente(_socket, _serverSocket, _cliente);
                 _linea =_leer.leer().split(":");
-                    enEspera = Integer.parseInt(_linea[2]) ;
+                    enEspera = Integer.parseInt(_linea[1]) ;
                     enEspera++;
                     _escribir.escribir(enEspera+":"+_linea[2]+":"+_linea[3]);
                     System.out.println("En Espera: "+enEspera+" Recibidos  "+_linea[2]+" Enviados: "+_linea[3]);
