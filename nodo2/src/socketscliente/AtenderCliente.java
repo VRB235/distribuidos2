@@ -15,6 +15,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.rmi.registry.LocateRegistry; 
+import java.rmi.registry.Registry;  
 
 /**
  *
@@ -58,7 +60,13 @@ public class AtenderCliente implements Runnable {
                         _out = new ObjectOutputStream(_socket.getOutputStream());
                         _in = new ObjectInputStream(_socket.getInputStream());
                         
+                        
                         Transporte _transporte = (Transporte) _in.readObject();
+                        
+                    /////RMI 
+
+                    /////FIN DE RMI     
+                    
                         ArrayList<Paquete> _paquetes = _transporte.getPaquetes();
                         if(_paquetes.size()!=0)
                         {
