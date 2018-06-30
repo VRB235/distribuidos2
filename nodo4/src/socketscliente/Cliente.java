@@ -43,7 +43,7 @@ public class Cliente implements Runnable {
                     ObjectOutputStream _out = new ObjectOutputStream(_socket.getOutputStream());
                     ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
 
-
+                    System.out.println("Envaindo a nodo Principal");
                     _out.writeObject(_transporte);
                     _dataInputStream.close();
                     _dataOutputStream.close();
