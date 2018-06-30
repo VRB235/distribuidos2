@@ -41,7 +41,7 @@ public class Cliente implements Runnable {
         _puertos.add(String.valueOf(Variables.puerto2));
         _puertos.add(String.valueOf(Variables.puerto3));
         _puertos.add(String.valueOf(Variables.puerto4));
-        int i = 1;
+        int i = 0;
         Socket _socket;
         while(true){
             try {
