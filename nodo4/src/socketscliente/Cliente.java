@@ -10,7 +10,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import static java.lang.Thread.sleep;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.TimerTask;
 
 /**
@@ -19,31 +21,47 @@ import java.util.TimerTask;
  */
 public class Cliente implements Runnable {
     
-    private Transporte _transporte;
+    public Transporte _transporte;
     
     public void enviarTransporte(Transporte _transporte){
         this._transporte = _transporte;
-        this._transporte.setPaquete(_transporte.getPaquete()+1);
     }
-    
+
     @Override
-    public void run(){
+    public void run() {
+        ArrayList <String> _nodos;
+        ArrayList <String> _puertos;
+        _nodos = new ArrayList<>();
+        _nodos.add(Variables.nodo1);
+        _nodos.add(Variables.nodo2);
+        _nodos.add(Variables.nodo3);
+        _nodos.add(Variables.nodo4);
+        _puertos = new ArrayList<>();
+        _puertos.add(String.valueOf(Variables.puerto1));
+        _puertos.add(String.valueOf(Variables.puerto2));
+        _puertos.add(String.valueOf(Variables.puerto3));
+        _puertos.add(String.valueOf(Variables.puerto4));
+        int i = 1;
+        for (int j = 0; j < 4; j++) {
+            System.out.println(_nodos.get(j));
+        }
         Socket _socket;
-        
-        try {
-            _socket = new Socket(Variables.nodo1, 1231);
-            DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
-            DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
-            //sleep(5000);
-            _dataOutputStream.writeUTF("sync");
-            String _respuesta = _dataInputStream.readUTF();
+        while(true){
+            try {
+                _socket = new Socket(_nodos.get(i), Integer.parseInt(_puertos.get(i))) ;
+                DataInputStream _dataInputStream = new DataInputStream(_socket.getInputStream());
+                DataOutputStream _dataOutputStream = new DataOutputStream(_socket.getOutputStream());
+
+                _dataOutputStream.writeUTF("sync");
+
+                String _respuesta = _dataInputStream.readUTF();
                 System.out.println(_respuesta); 
 
                 if(_respuesta.equals("ack")){
                     ObjectOutputStream _out = new ObjectOutputStream(_socket.getOutputStream());
                     ObjectInputStream _in = new ObjectInputStream(_socket.getInputStream());
 
-                    System.out.println("Envaindo a nodo Principal");
+                    Transporte _transporte = new Transporte();
                     Thread.sleep(20000);
                     _out.writeObject(_transporte);
                     _dataInputStream.close();
@@ -54,21 +72,41 @@ public class Cliente implements Runnable {
                 if(_respuesta.equals("close")){
                     _socket.close();
                 }
-            
-  
-        } catch (IOException ex) {
-            
-            System.out.println("Error al crear los stream de entradas y salidad: "
-                    + ex.getMessage());
-            
-        }catch(Exception e){
-            
-            System.out.println(e.getMessage());
-            
-        }
+
+
+
+            } catch (IOException ex) {
+
+                System.out.println("Error al crear los stream de entradas y salidad: "
+                        + ex.getMessage());
+                System.out.println("i="+i);
+                if(i==3){
+                    i=0;
+                }
+                else{
+                    if(i==0){
+                        i=1;
+                    }else{
+                        if(i==1){
+                            i=2;
+                        }else{
+                            if(i==2){
+                                i=3;
+                            }
+                        }
+                    }
+                }
+                
+                
+                
+
+            }catch(InterruptedException | NumberFormatException e){
+
+                System.out.println(e.getMessage());
+
+            }
+        
         
     }
-    
-    
-    
+}
 }

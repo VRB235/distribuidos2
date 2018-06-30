@@ -16,7 +16,6 @@ public class Transporte implements Serializable  {
     private int paquete;
 
     public Transporte() {
-        paquete = 5;
     } 
     public int getPaquete() {
         return paquete;
