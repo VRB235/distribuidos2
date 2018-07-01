@@ -13,5 +13,5 @@ import java.rmi.RemoteException;
 */
 public interface TestRemote extends Remote {
     String enviar(String saludo) throws RemoteException;
-    String primedio(long tiempo) throws RemoteException;
+    String promedio(long tiempo) throws RemoteException;
 }

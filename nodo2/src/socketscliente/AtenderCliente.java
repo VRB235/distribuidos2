@@ -73,6 +73,7 @@ public class AtenderCliente implements Runnable {
                           
                         Transporte _transporte = (Transporte) _in.readObject(); 
                         
+                        
                    /////RMI
                         RMIClientExample rmi = new RMIClientExample();
                         rmi.sync();
