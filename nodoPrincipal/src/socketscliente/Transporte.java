@@ -16,10 +16,20 @@ public class Transporte implements Serializable  {
     
     private ArrayList<Paquete> _paquetes;
     private int _paquetesFallidos;
+    private int _paquetesExitosos;
 
     public Transporte() {
         _paquetes = new ArrayList<Paquete>();
         _paquetesFallidos = 0;
+        _paquetesExitosos = 0;
+    }
+
+    public int getPaquetesExitosos() {
+        return _paquetesExitosos;
+    }
+
+    public void setPaquetesExitosos(int _paquetesExitosos) {
+        this._paquetesExitosos = _paquetesExitosos;
     }
 
     public int getPaquetesFallidos() {

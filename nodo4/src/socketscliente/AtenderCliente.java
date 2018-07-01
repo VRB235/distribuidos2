@@ -94,6 +94,7 @@ public class AtenderCliente implements Runnable {
                         {
                             if(_paquetes.size()>2){
                                 for (int i = 0; i < 2; i++) {
+                                    _transporte.setPaquetesExitosos(_transporte.getPaquetesExitosos()+1);
                                     System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
                                     System.out.println("Bajando Paquete");
                                     Thread.sleep(10000);
@@ -101,9 +102,16 @@ public class AtenderCliente implements Runnable {
                                     _paquetes.remove(i);
                                     System.out.println("Paquetes Restantes : "+_transporte.getPaquetes().size());
                                     System.out.println("Paquete Bajado");
+                                    _linea =_leer.leer().split(":");
+                                    System.out.println("En espera "+_linea[1]);
+                                    enEspera = Integer.parseInt(_linea[1]) ;
+                                    enEspera--;
+                                    _escribir.escribir(enEspera+":"+_linea[2]+":"+_linea[3]);
+                                    System.out.println("En Espera: "+enEspera+" Recibidos  "+_linea[2]+" Enviados: "+_linea[3]);
                                 }
                             }else{
                                 for (int i = 0; i < _paquetes.size(); i++) {
+                                    _transporte.setPaquetesExitosos(_transporte.getPaquetesExitosos()+1);
                                     _paquetes.removeAll(_paquetes);
                                 }
                             }
@@ -112,6 +120,7 @@ public class AtenderCliente implements Runnable {
                                 if(_paquetes.size()<5){
                                     for (int i = 0; i < 1; i++) {
                                         if(_paquetes.size()<5){
+                                            _transporte.setPaquetesExitosos(_transporte.getPaquetesExitosos()+1);
                                             System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
                                             System.out.println("Subiendo Paquete");
                                             Thread.sleep(10000);

@@ -46,4 +46,20 @@ public class EscribirFichero {
         }
     }
     
+    synchronized public void escribirExitosos(long _valor)
+    {
+      try
+        {
+            FileWriter _writer = new FileWriter("C:\\Users\\GOMEZ\\Downloads\\ProyectoDistribuidos2\\exitosos.txt",true);
+            PrintWriter _printWriter = new PrintWriter(_writer);
+
+                _printWriter.println(_valor);
+
+                _printWriter.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

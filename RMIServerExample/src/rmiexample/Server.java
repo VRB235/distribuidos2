@@ -46,6 +46,13 @@ public class Server implements Runnable {
                     _escribirFichero.escribirFallidos(_valor);
                     return "Servidor ACK/fallidos";
                 }
+
+                @Override
+                public String exitosos(int valor) throws RemoteException {
+                    System.out.println("Transportes Exitosos");
+                    _escribirFichero.escribirExitosos(valor);
+                    return "Servidor ACK/fallidos";
+                }
                 
             }
                     

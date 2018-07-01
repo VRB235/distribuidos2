@@ -15,4 +15,5 @@ public interface TestRemote extends Remote {
     String enviar(String saludo) throws RemoteException;
     String promedio(long tiempo) throws RemoteException;
     String fallidos(int valor) throws RemoteException;
+    String exitosos(int valor) throws RemoteException;
 }
