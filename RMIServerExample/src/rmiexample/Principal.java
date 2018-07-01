@@ -17,13 +17,13 @@ public class Principal {
         
         Server _server = new Server();
         Consola _consola = new Consola();
-        ClienteSocket _clienteSocket = new ClienteSocket();
+        //ClienteSocket _clienteSocket = new ClienteSocket();
         Thread _threadConsola = new Thread(_consola);
         Thread _threadServer = new Thread(_server);
-        Thread _threadClienteSocket = new Thread(_clienteSocket);
+       // Thread _threadClienteSocket = new Thread(_clienteSocket);
         _threadServer.start();
         _threadConsola.start();
-        _threadClienteSocket.start();
+        //_threadClienteSocket.start();
         
         
         
