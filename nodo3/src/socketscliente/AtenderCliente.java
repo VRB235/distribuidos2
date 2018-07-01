@@ -102,6 +102,7 @@ public class AtenderCliente implements Runnable {
                                     _paquetes.remove(i);
                                     System.out.println("Paquetes Restantes : "+_transporte.getPaquetes().size());
                                     System.out.println("Paquete Bajado");
+                                    _linea =_leer.leer().split(":");
                                     System.out.println("En espera "+_linea[1]);
                                     enEspera = Integer.parseInt(_linea[1]) ;
                                     enEspera--;
