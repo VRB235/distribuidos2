@@ -32,6 +32,16 @@ public class Consola implements Runnable {
                  _promedio /= _promedios.length;
                  System.out.println("El promedio es de :"+_promedio);
             }
+            if(_scan.nextLine().equals("2")){
+                System.out.println("Calculando Fallidos...");
+                LeerFichero _leeFichero = new LeerFichero();
+                String [] _promedios = _leeFichero.leerFallidos().split(":");
+                 double _promedio = 0;
+                 for (int i = 1; i < _promedios.length; i++) {
+                    _promedio += Integer.parseInt(_promedios[i]);
+                 }
+                 System.out.println("El numero de paquetes fallidos fue de :"+_promedio);
+            }
             if(_scan.nextLine().equals("0")){
                 break;
             }
