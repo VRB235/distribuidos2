@@ -15,9 +15,19 @@ import java.util.ArrayList;
 public class Transporte implements Serializable  {
     
     private ArrayList<Paquete> _paquetes;
+    private int _paquetesFallidos;
 
     public Transporte() {
         _paquetes = new ArrayList<Paquete>();
+        _paquetesFallidos = 0;
+    }
+
+    public int getPaquetesFallidos() {
+        return _paquetesFallidos;
+    }
+
+    public void setPaquetesFallidos(int _paquetesFallidos) {
+        this._paquetesFallidos = _paquetesFallidos;
     }
 
     public ArrayList<Paquete> getPaquetes() {

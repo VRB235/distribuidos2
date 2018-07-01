@@ -29,4 +29,9 @@ public class RMIClientExample {
         TestRemote testRemote = (TestRemote) registry.lookup("Test"); //Buscar en el registro...
         System.out.println(testRemote.promedio(i));
     }
+    public  void enviarFallidos (int i) throws RemoteException, NotBoundException {
+        Registry registry = LocateRegistry.getRegistry(IP,5555);
+        TestRemote testRemote = (TestRemote) registry.lookup("Test"); //Buscar en el registro...
+        System.out.println(testRemote.fallidos(i));
+    }
 }

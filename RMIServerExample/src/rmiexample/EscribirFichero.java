@@ -14,11 +14,27 @@ import java.io.PrintWriter;
  */
 public class EscribirFichero {
     
-    synchronized public void escribir(long _valor)
+    synchronized public void escribirPromedios(long _valor)
     {
       try
         {
             FileWriter _writer = new FileWriter("C:\\Users\\GOMEZ\\Downloads\\ProyectoDistribuidos2\\promedios.txt",true);
+            PrintWriter _printWriter = new PrintWriter(_writer);
+
+                _printWriter.println(_valor);
+
+                _printWriter.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    synchronized public void escribirFallidos(int _valor)
+    {
+      try
+        {
+            FileWriter _writer = new FileWriter("C:\\Users\\GOMEZ\\Downloads\\ProyectoDistribuidos2\\fallidos.txt",true);
             PrintWriter _printWriter = new PrintWriter(_writer);
 
                 _printWriter.println(_valor);

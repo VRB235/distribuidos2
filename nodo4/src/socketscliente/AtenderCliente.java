@@ -111,12 +111,16 @@ public class AtenderCliente implements Runnable {
                             if(!_paquetes.isEmpty()){
                                 if(_paquetes.size()<5){
                                     for (int i = 0; i < 1; i++) {
-                                        System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
-                                        System.out.println("Subiendo Paquete");
-                                        Thread.sleep(10000);
-                                        _paquetes.add(new Paquete());
-                                        System.out.println("Subiendo Restantes : "+_transporte.getPaquetes().size());
-                                        System.out.println("Paquete Subido");
+                                        if(_paquetes.size()<5){
+                                            System.out.println("Transporte" +_socket.getInetAddress()+ " con "+_transporte.getPaquetes().size()+ " paquetes");
+                                            System.out.println("Subiendo Paquete");
+                                            Thread.sleep(10000);
+                                            _paquetes.add(new Paquete());
+                                            System.out.println("Subiendo Restantes : "+_transporte.getPaquetes().size());
+                                            System.out.println("Paquete Subido");
+                                        }else{
+                                            _transporte.setPaquetesFallidos(_transporte.getPaquetesFallidos()+1);
+                                        }
                                     }
                                 }
                             }
