@@ -81,6 +81,8 @@ public class Servidor implements Runnable {
                    /////RMI
                         RMIClientExample rmi = new RMIClientExample();
                         rmi.sync();
+                        rmi.enviarFallidos(_transporte.getPaquetesFallidos());
+                        rmi.enviarExitosos(_transporte.getPaquetesExitosos());
                    ////FIN  RMI
                         
                         System.out.println("EL TRANSPORTE HA LLEGADO CON "+_transporte.getPaquetes().size() + " paquetes");

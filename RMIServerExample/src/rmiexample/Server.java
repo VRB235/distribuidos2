@@ -36,8 +36,22 @@ public class Server implements Runnable {
                 @Override
                 synchronized public String promedio(long tiempo) throws RemoteException {
                     System.out.println("Promedio Recibido: "+tiempo);
-                    _escribirFichero.escribir(tiempo);
+                    _escribirFichero.escribirPromedios(tiempo);
                     return "Servidor ACK/promedio";
+                }
+
+                @Override
+                public String fallidos(int _valor) throws RemoteException {
+                    System.out.println("Transportes Fallidos");
+                    _escribirFichero.escribirFallidos(_valor);
+                    return "Servidor ACK/fallidos";
+                }
+
+                @Override
+                public String exitosos(int valor) throws RemoteException {
+                    System.out.println("Transportes Exitosos");
+                    _escribirFichero.escribirExitosos(valor);
+                    return "Servidor ACK/fallidos";
                 }
                 
             }

@@ -19,7 +19,7 @@ public class RMIClientExample {
 	//private static final int PUERTO = 5555; //Si cambias aquí el puerto, recuerda cambiarlo en el servidor
 	
     public  void sync () throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(IP,Registry.REGISTRY_PORT);
+        Registry registry = LocateRegistry.getRegistry(IP,5555);
         TestRemote testRemote = (TestRemote) registry.lookup("Test"); //Buscar en el registro...
         System.out.println(testRemote.enviar("sync"));
     }
@@ -28,5 +28,15 @@ public class RMIClientExample {
         Registry registry = LocateRegistry.getRegistry(IP,5555);
         TestRemote testRemote = (TestRemote) registry.lookup("Test"); //Buscar en el registro...
         System.out.println(testRemote.promedio(i));
+    }
+    public  void enviarFallidos (int i) throws RemoteException, NotBoundException {
+        Registry registry = LocateRegistry.getRegistry(IP,5555);
+        TestRemote testRemote = (TestRemote) registry.lookup("Test"); //Buscar en el registro...
+        System.out.println(testRemote.fallidos(i));
+    }
+    public  void enviarExitosos (int i) throws RemoteException, NotBoundException {
+        Registry registry = LocateRegistry.getRegistry(IP,5555);
+        TestRemote testRemote = (TestRemote) registry.lookup("Test"); //Buscar en el registro...
+        System.out.println(testRemote.exitosos(i));
     }
 }

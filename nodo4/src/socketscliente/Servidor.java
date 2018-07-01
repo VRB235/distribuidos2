@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class Servidor implements Runnable {
     
     Socket _socket;
-    int enEspera= 0;
+    int enEspera = 0;
     
     public Servidor (){
         _socket = null;
@@ -31,11 +31,16 @@ public class Servidor implements Runnable {
     
     @Override
     public void run (){
-        
+        /*LeeFichero _leer = new LeeFichero();
+        EscribeFichero _escribir = new EscribeFichero();
+        if(_leer.leer()<=3){
+            _escribir.escribir(_leer.leer()+1); 
+        }*/
         Cliente _cliente = new Cliente();
         String [] _linea;
         LeeFichero _leer = new LeeFichero();
         EscribeFichero _escribir = new EscribeFichero();
+        
         try {
             
             ServerSocket _serverSocket = new ServerSocket(1234);
@@ -52,11 +57,8 @@ public class Servidor implements Runnable {
                     _escribir.escribir(enEspera+":"+_linea[2]+":"+_linea[3]);
                     System.out.println("En Espera: "+enEspera+" Recibidos  "+_linea[2]+" Enviados: "+_linea[3]);
                 _threadAtenderCliente = new Thread(_atenderCliente);
-                /*
-                LeeFichero _leer = new LeeFichero();
-                if(_leer.leer()<3){*/
-                    _threadAtenderCliente.start();
-                //}
+                _threadAtenderCliente.start();
+                
                 if(1==2){
                     break;
                 }
